@@ -1,0 +1,85 @@
+{% extends 'base template/home.html' %}
+{% block create_groupe %}
+<!DOCTYPE html>
+<html lang="en">
+ <style>
+   #customers {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+    margin-left: 10%;
+
+}
+
+#customers td, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+    text-align: center;
+}
+
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: #ddd;}
+
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  background-color:  rgb(220, 220, 220);
+  color: rgb(30, 30, 30);
+}
+        td{
+            background-color:rgb(220, 220, 220);
+            color:rgb(0, 0, 0) ;
+        }
+        #country{
+            margin-left: 10%;
+        }
+        label{margin-left: 10%}
+</style>
+
+<body>
+
+{% for i in show %}
+<img style="margin-left: 10%" src="{{ i.img_due_days }}" width="100px">
+    <p style="margin-left: 10% ">{{ i.reason_due }}</p>
+
+
+
+
+    <table id="customers">
+  <tr>
+
+
+    <th style="width: 2%;">apset days </th>
+
+
+
+
+  </tr>
+
+
+
+        <tr>
+
+
+
+
+
+                {% for apsets in query %}
+                {% if apsets.apset != None %}
+                    <td style="width: 2%;">{{ apsets.apset }}</td>
+                {% endif %}
+
+        </tr>
+
+
+{% endfor %}
+    </table>
+                    <a href="{{ url_for('commit_due',student_id=i.student_id,id_reason=i.id) }}"><button style="margin-left: 10% " type="submit">Commit</button></a>
+<a href="{{ url_for('refuse_due',student_id=i.student_id,id_reason=i.id) }}"><button style="margin-left: 10% " type="submit">Refuse</button></a>
+
+
+{% endfor %}
+
+</body>
+</html>
+{% endblock %}

@@ -1,0 +1,142 @@
+{% extends 'base template/home.html' %}
+{% block groups%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Inside of group</title>
+    <style>
+   #customers {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+    margin-left: 10%;
+
+}
+
+#customers td, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+    text-align: center;
+}
+
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: #ddd;}
+
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  background-color:  rgb(220, 220, 220);
+  color: rgb(30, 30, 30);
+}
+        td{
+            background-color:rgb(220, 220, 220);
+            color:rgb(0, 0, 0) ;
+        }
+        #country{
+            margin-left: 10%;
+        }
+        label{margin-left: 10%}
+  #al{
+            margin-left: 7.5%;
+            width: 100%;
+            height: 5.5%;
+        }
+</style>
+</head>
+<body>
+<ul id="al">
+    <li><a href="{{ url_for('all_groups') }}">All Groups</a></li>
+    <li><a href="{{ url_for('group_without_teacher') }}">Groups Without Teacher</a> </li>
+</ul>
+<br>
+<br>
+                {% for group in groups %}
+                    {% if group.location == 1 %}
+                        {% if group.name != '' %}
+                        <h1 style="text-align: center">{{ group.name }}<a href="{{ url_for('del_name_group',id=group.id) }}" style="margin-left: 2%"><button>Rename</button></a></h1>
+                        {% endif %}
+                            {% if group.name == '' %}
+                            <form action="{{ url_for("rename_group",id=group.id) }}" method="post">
+                        <input style="margin-left: 40%" type="text" value="{{ group.old_name }}" name="name">
+                            <input style="margin-left: 50%" type="submit" value="submit">
+                            </form>
+                            {% endif %}
+
+                        <a style="margin-left:90%" href="{{ url_for('delete_group', id=group.id,gr=group.teacher_1) }}"><button>Delete Group</button> </a>
+                        <br>
+                        <br>
+                        <a href="{{ url_for('show_group',group_id=group.id) }}"><button style="margin-left: 88%">Move to other group</button></a>
+                    {% endif %}
+
+
+    {% if group.teacher_1 != 0 %}
+        <h3 style="margin-left: 10%">Teacher: {{ group.teacher_name }}<a href="{{ url_for('delete_teacher1', id=group.id,gr=group.teacher_1) }}"><button>&cross;</button> </a></h3>
+    {% endif %}
+    {% if group.teacher_1 == 0 %}
+
+
+<form  action="{{ url_for('add_teacher',group_id=group.id) }}" method="post">
+          <select id="country" name="Names">
+              {% for i in teachers %}
+                <option  value="{{ i.id }}">{{ i.name }}</option>
+              {% endfor %}
+          </select><input type="submit" value="add teacher to this group">
+</form>
+    {% endif %}
+
+    <table id="customers">
+  <tr>
+
+
+      <th style="width: 2%;">Students</th>
+
+
+
+
+  </tr>
+
+
+
+        <tr>
+
+
+
+
+                {% for student in students %}
+                    {% if student.locations == 1 %}
+                    <td style="width: 2%;"><a href="{{ url_for('student_profile2',student_id=student.id) }}" >{{ student.name }}</a>
+                         <input class="checkbox1" type="checkbox" data-id="{{ student.id }}" {% if student.for_moved %} checked {% endif %}>
+                        <a style="margin-left: 80%" href="{{ url_for('delete_student_q', id=student.id,teacher_id=group.teacher_1,gr_id=group.id) }}"><button>&cross;</button> </a></td>
+                    {% endif %}
+        </tr>
+
+
+{% endfor %}
+    </table>
+{% endfor %}
+<script>
+     const checkbox1 = document.querySelectorAll('.checkbox1')
+        for (d = 0; d < checkbox1.length; d++){
+            const checked = checkbox1[d]
+            checked.onchange = function (e) {
+                console.log(e,'event')
+                const check_id = e.target.dataset['id']
+                const checking = e.target.checked
+                fetch('/check_moved/'+check_id,{
+                    method : "POST",
+                    body : JSON.stringify({
+                        'completed' : checking
+                    }),
+                    headers : {
+                        'Content-type' : 'application/json'
+                    }
+                })
+
+            }
+        }
+
+</script>
+</body>
+</html>
+{% endblock %}

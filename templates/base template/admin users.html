@@ -1,0 +1,81 @@
+{% extends 'base template/home.html' %}
+{% block admin %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Users</title>
+    <style>
+     #customers {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+    margin-left: 10%;
+
+}
+
+#customers td, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+    text-align: center;
+}
+
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: #ddd;}
+
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  background-color:  rgb(220, 220, 220);
+  color: rgb(30, 30, 30);
+}
+        td{
+            background-color:rgb(220, 220, 220);
+            color:rgb(0, 0, 0) ;
+        }
+        #country{
+            margin-left: 10%;
+        }
+</style>
+</head>
+<body>
+<table id="customers">
+<tr>
+    <th>Name</th>
+    <th>Surname</th>
+    <th>Phone</th>
+    <th>Admin Xojakent</th>
+    <th>Admin Gazalkent</th>
+    <th>Delete user</th>
+  </tr>
+    {% for admin in show %}
+        {% if admin.director == False %}
+  <tr>
+      <td><a href="{{ url_for('student_profile',student_id=admin.id) }}" >{{ admin.name }}</a></td>
+    <td>{{ admin.surname }}</td>
+    <td>{{ admin.phone }}</td>
+      {% if admin.xojakent_admin == False  %}
+      <td><a href="/make_admin_xojakent/{{ admin.id }}">{{ admin.xojakent_admin }}</a></td>
+          {% endif %}
+        {% if admin.xojakent_admin == True %}
+      <td><a href="/kick_admin_xojakent/{{ admin.id }}">{{ admin.xojakent_admin }}</a></td>
+          {% endif %}
+
+        {% if admin.gazalkent_admin == False  %}
+      <td><a href="/make_admin_gazalkent/{{ admin.id }}">{{ admin.gazalkent_admin }}</a></td>
+          {% endif %}
+        {% if admin.gazalkent_admin == True  %}
+      <td><a href="/kick_admin_gazalkent/{{ admin.id }}">{{ admin.gazalkent_admin }}</a></td>
+          {% endif %}
+        {% endif %}
+        {% if admin.director == False %}
+        <td><a href="{{ url_for('delete_user',delete_id=admin.id) }}"><button>&cross;</button></a> </td>
+        {% endif %}
+    </tr>
+
+    {% endfor %}
+</table>
+</body>
+</html>
+{% endblock %}

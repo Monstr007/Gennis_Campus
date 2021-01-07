@@ -1,0 +1,93 @@
+{% extends 'base template/home.html' %}
+{% block login %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Payment</title>
+     <style>
+   #customers {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+    margin-left: 7.5%;
+
+}
+
+#customers td, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+    text-align: center;
+}
+
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: #ddd;}
+
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  background-color:  rgb(220, 220, 220);
+  color: rgb(30, 30, 30);
+}
+        td{
+            background-color:rgb(220, 220, 220);
+            color:rgb(0, 0, 0) ;
+        }
+        #country{
+            margin-left: 10%;
+        }
+         #al{
+            margin-left: 7.5%;
+            width: 100%;
+            height: 5.5%;
+        }
+         form{
+             margin-left: 7.5%;
+         }
+         p{margin-left: 7.5%}
+</style>
+</head>
+<body>
+<ul id="al">
+    <li><a href="{{ url_for('payment') }}">Payment</a></li>
+    <li><a href="{{ url_for('teacher_result') }}">Teacher Salary</a></li>
+    <li><a href="{{ url_for('capital') }}">Capital Expenditure</a></li>
+    <li><a href="{{ url_for('overhead') }}">Overhead</a></li>
+    <li><a href="{{ url_for('withdrawal') }}">Withdrawal</a></li>
+    <li><a href="{{ url_for('student_debts') }}">Students with debts</a></li>
+</ul>
+<br>
+<br>
+{% for banks in bank %}
+<p>{{ banks.cash }}</p>
+{% endfor %}
+    <table id="customers">
+<tr>
+     <th>Payment Data</th>
+    <th>Username</th>
+    <th>Name</th>
+    <th>Surname</th>
+    <th>Previous Sum</th>
+    <th>Payment</th>
+    <th>Result Balance</th>
+
+</tr>
+        {% for information in info %}
+
+        <tr>
+             <td>{{ information.payment_data.strftime('%B %d, %Y') }}</td>
+            <td>{{ information.username }}</td>
+            <td>{{ information.student_name }}</td>
+            <td>{{ information.student_surname }}</td>
+            <td>{{ information.debt }}</td>
+            <td>{{ information.payment }}</td>
+            <td>{{ information.result }}</td>
+
+        </tr>
+
+        {% endfor %}
+    </table>
+
+</body>
+</html>
+{% endblock %}

@@ -1,0 +1,112 @@
+{% extends 'base template/home.html' %}
+{% block attendance %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My attendance</title>
+     <style>
+       #customers {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+    margin-left: 7.5%;
+
+}
+
+#customers td, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+    text-align: center;
+}
+
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: #ddd;}
+
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  background-color:  rgb(220, 220, 220);
+  color: rgb(30, 30, 30);
+}
+        td{
+            background-color:rgb(220, 220, 220);
+            color:rgb(0, 0, 0) ;
+        }
+        #country{
+            margin-left: 10%;
+        }
+         #al{
+            margin-left: 7.5%;
+            width: 100%;
+            height: 5.5%;
+        }
+</style>
+</head>
+<body>
+<ul id="al">
+    <li><a href="{{ url_for('find_attendance1') }}">Group1</a></li>
+    <li><a href="{{ url_for('find_attendance2') }}">Group2</a></li>
+    <li><a href="{{ url_for('find_attendance3') }}">Group3</a></li>
+</ul>
+<br>
+<br>
+
+<table id="customers">
+    <tr>
+        <th>Darsga tayyorgarligi</th>
+            {% if attendance2.lugat != 0 %}
+          <th>Lug'at</th>
+            {% endif %}
+          <th>Darsda qatnashishi</th>
+         <th>Baho</th>
+         <th>Davomat</th>
+
+        <th><a href="{{ url_for('due_days1') }}">Sababli</a></th>
+    </tr>
+ {% for att in attendance %}
+     <tr>
+        <td>{{ att.darsga_tayyorgarligi }}</td>
+         {% if attendance2.lugat != 0 %}
+        <td>{{ att.lugat }}</td>
+     {% endif %}
+        <td>{{ att.darsda_qatnashishi }}</td>
+        <td>{{ att.ortacha_baho }}</td>
+        <td>{% if att.present != None %}
+            <p style="color: blue">{{ att.present.strftime('%B %d, %Y') }}</p>
+        {% endif %}
+
+
+           {% if att.apset != None %}
+               {{ att.apset.strftime('%B %d, %Y') }}
+               <input class="checkbox" type="checkbox" data-id="{{ att.id }}"{% if att.for_sabab %} checked {% endif %}>
+        {% endif %}</td>
+
+    </tr>
+
+{% endfor %}
+
+</table>
+<script>
+     const checkbox2 = document.querySelectorAll('.checkbox')
+        for (d = 0; d < checkbox2.length; d++){
+            const checked = checkbox2[d]
+            checked.onchange = function (e) {
+                console.log(e,'event')
+                const check_id = e.target.dataset['id']
+                const checking = e.target.checked
+                fetch('/get_id/'+check_id,{
+                    method : "POST",
+                    body : JSON.stringify({
+                        'completed' : checking
+                    }),
+                    headers : {
+                        'Content-type' : 'application/json'
+                    }
+                })
+            }
+        }
+</script>
+</body>
+</html>
+{% endblock %}

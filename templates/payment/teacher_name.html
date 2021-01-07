@@ -1,0 +1,88 @@
+{% extends 'base template/home.html' %}
+{% block login %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+      #customers {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+    margin-left: 7.5%;
+
+}
+
+#customers td, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+    text-align: center;
+}
+
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: #ddd;}
+
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  background-color:  rgb(220, 220, 220);
+  color: rgb(30, 30, 30);
+}
+        td{
+            background-color:rgb(220, 220, 220);
+            color:rgb(0, 0, 0) ;
+        }
+        #country{
+            margin-left: 10%;
+        }
+         #al{
+            margin-left: 7.5%;
+            width: 100%;
+            height: 5.5%;
+        }
+         form{
+             margin-left: 7.5%;
+         }
+</style>
+</head>
+<body>
+<ul id="al">
+    <li><a href="{{ url_for('payment') }}">Payment</a></li>
+    <li><a href="{{ url_for('teacher_result') }}">Teacher Salary</a></li>
+    <li><a href="{{ url_for('capital') }}">Capital Expenditure</a></li>
+    <li><a href="{{ url_for('overhead') }}">Overhead</a></li>
+</ul>
+
+<br>
+<br>
+{% for id in names %}
+<form action="{{ url_for('salary_give',id=id.id) }}" method="post">
+{% endfor %}
+<table id="customers">
+<tr>
+    <th>Photo</th>
+    <th>Name</th>
+    <th>Surname</th>
+    <th>Gmail</th>
+    <th>Salary</th>
+    <th>Pay</th>
+</tr>
+    {% for info in names %}
+    <tr>
+        <td><img src="{{ info.photo }}" alt="user image" width="100px"></td>
+        <td>{{ info.name }}</td>
+        <td>{{ info.surname }}</td>
+        <td>{{ info.gmail }}</td>
+        <td>{{ info.salary }}</td>
+        <td><input type="text" name="teacher_salary"></td>
+    </tr>
+    {% endfor %}
+</table>
+
+    <input type="submit" value="calculate"></form>
+
+
+</body>
+</html>
+{% endblock %}

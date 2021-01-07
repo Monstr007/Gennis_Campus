@@ -1,0 +1,27 @@
+{% extends 'base template/home.html' %}
+{% block login %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>New Students</title>
+    <style>
+        #ul{
+            margin-left: 8%;
+            list-style-type: none;
+            width: 200px;
+            height: 50px;
+            float: left;
+            background-color: white;
+            position: fixed;
+        }
+    </style>
+</head>
+<body>
+<ul id="ul">
+ <li id="li"><a id="a" href="/location-1">Xojakent</a></li>
+ <li id="li"><a id="a" href="/location-2">Gazalkent</a></li>
+</ul>
+</body>
+</html>
+{% endblock %}

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>List of absent students</title>
+     <style>
+    #customers {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#customers td, #customers th {
+
+  padding: 8px;
+}
+
+
+
+#customers tr:hover {background-color:rgb(30, 30, 30);
+color: rgb(220,220,0);
+}
+
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: rgb(30, 30, 30);
+  color: rgb(220,220,0);
+}
+</style>
+</head>
+<body>
+<table id="customers">
+<tr>
+    <th>Absent days</th>
+  </tr>
+    <tr>{% for absent_days in attendance %}
+        {% if absent_days.apset != None %}
+        <td> {{ absent_days.apset }}<a href="{{ url_for('delete_days',day_id=absent_days.id,student_id=id) }}"><button>&cross;</button></a></td>
+        {% endif %}
+    </tr>
+    {% endfor %}
+</table>
+</body>
+</html>

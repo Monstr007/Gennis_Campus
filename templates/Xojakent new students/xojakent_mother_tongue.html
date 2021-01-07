@@ -1,0 +1,96 @@
+{% extends 'base template/home.html' %}
+{% block xojakent_mother_tongue %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+#customers {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+    margin-left: 7.5%;
+
+}
+
+#customers td, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+    text-align: center;
+}
+
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: #ddd;}
+
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  background-color:  rgb(220, 220, 220);
+  color: rgb(30, 30, 30);
+}
+        td{
+            background-color:rgb(220, 220, 220);
+            color:rgb(0, 0, 0) ;
+        }
+        #country{
+            margin-left: 10%;
+        }
+         #al{
+            margin-left: 7.5%;
+            width: 100%;
+            height: 5.5%;
+        }
+</style>
+</head>
+<body>
+<ul id="al">
+
+    <li><a href="{{ url_for('location1') }}">All Students</a></li>
+    <li><a href="{{ url_for('student_english') }}">English Language</a></li>
+    <li><a href="{{ url_for('xojakent_russian') }}">Russian Language</a> </li>
+    <li><a href="{{ url_for('xojakent_history') }}">History</a></li>
+    <li><a href="{{ url_for('xojakent_physics') }}">Physics</a></li>
+    <li><a href="{{ url_for('xojakent_biology') }}">Biology</a></li>
+    <li><a href="{{ url_for('xojakent_chemistry') }}">Chemistry</a></li>
+    <li><a href="{{ url_for('xojakent_math') }}">Mathematics</a> </li>
+    <li><a href="{{ url_for('xojakent_tongue') }}">Mother Tongue and Literature</a> </li>
+     <li><a href="{{ url_for('student_xamshira') }}">Uy xamshiraligi</a> </li>
+</ul>
+<br>
+
+<br>
+ <table id="customers">
+  <tr>
+    <th style="width: 25%;">Name</th>
+    <th style="width: 25%;">Surname</th>
+    <th style="width: 25%;">Age</th>
+    <th style="width: 25%;">Phone</th>
+      <th style="width: 25%;"><a href="{{ url_for('create_group') }}">Create group</a></th>
+      <th style="width: 25%;"><a href="{{ url_for('add_group') }}">Add group</a></th>
+  </tr>
+        {% for kid in show %}
+            {% if kid.director == False and kid.xojakent_admin == False and kid.gazalkent_admin == False %}
+            {% if kid.subject_1 == 'Ona tili va Adabiyot' or  kid.subject_2 == 'Ona tili va Adabiyot' or kid.subject_3 == 'Ona tili va Adabiyot' %}
+        {% if kid.locations == 1 %}
+            {% if kid.group1 == None or kid.group2 == None or kid.group3 == None %}
+        <tr>
+            <td style="width: 25%;">{{ kid.name }}</td>
+            <td style="width: 25%;">{{ kid.surname }}</td>
+            <td style="width: 25%;">{{ kid.age }}</td>
+            <td style="width: 25%;">{{ kid.phone }}</td>
+        <th style="width: 25%;"><label>
+        <input class="checkbox1" type="checkbox" data-id="{{ kid.id }}" {% if kid.for_group %} checked {% endif %}>
+    </label></th>
+
+        </tr>
+                {% endif %}
+            {% endif %}
+                    {% endif %}
+            {% endif %}
+        {% endfor %}
+    </table>
+<script src="/static/checkbox.js"></script>
+</body>
+</html>
+{% endblock %}

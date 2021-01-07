@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Profile</title>
+</head>
+<body>
+{% for student_info in student_q %}
+<img src="{{ student_info.photo }}" width="100px">
+<div>Name: {{ student_info.name }}</div>
+<div>Surname: {{ student_info.surname }}</div>
+<div>Age: {{ student_info.age }}</div>
+<div>Gmail: {{ student_info.gmail }}</div>
+<div>Phone Number: {{ student_info.phone }}</div>
+    {% if student_info.subject_1 != None and student_info.subject_2 != None and student_info.subject_3 != None %}
+<div>Subjects: {{ student_info.subject_1 }} {{ student_info.subject_2 }} {{ student_info.subject_3 }}</div>
+    {% endif %}
+    <a style="margin-left: 50%" href="{{ url_for('delete_page',id=student_info.id) }}"><button>&cross;</button></a>
+<div>Balance: {{ student_info.money }}</div>
+    <div>Payment: <form action="{{ url_for('calculate',id=student_info.id) }}" method="post"><input type="text" name="pay">
+        <input type="submit" value="submit">
+    </form></div>
+    {% endfor %}
+{% for group_n1 in group_name1 %}
+    <div>Group 1:<a href="{{ url_for('inside_of_group',id=group_n1.id) }}">{{ group_n1.name }}</a></div>
+    {% endfor %}
+{% for group_n2 in group_name2 %}
+    <div>Group 2:<a href="{{ url_for('inside_of_group',id=group_n2.id) }}">{{ group_n2.name }}</a></div>
+    {% endfor %}
+{% for group_n3 in group_name3 %}
+    <div>Group 3:<a href="{{ url_for('inside_of_group',id=group_n3.id) }}">{{ group_n3.name }}</a></div>
+{% endfor %}
+
+
+
+
+<div></div>
+</body>
+</html>

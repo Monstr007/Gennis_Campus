@@ -1,0 +1,93 @@
+{% extends 'base template/home.html' %}
+{% block login %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Overhead</title>
+     <style>
+      #customers {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+    margin-left: 7.5%;
+
+}
+
+#customers td, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+    text-align: center;
+}
+
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: #ddd;}
+
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  background-color:  rgb(220, 220, 220);
+  color: rgb(30, 30, 30);
+}
+        td{
+            background-color:rgb(220, 220, 220);
+            color:rgb(0, 0, 0) ;
+        }
+        #country{
+            margin-left: 10%;
+        }
+         #al{
+            margin-left: 7.5%;
+            width: 100%;
+            height: 5.5%;
+        }
+         form{
+             margin-left: 7.5%;
+         }
+</style>
+</head>
+<body>
+<ul id="al">
+    <li><a href="{{ url_for('payment') }}">Payment</a></li>
+    <li><a href="{{ url_for('teacher_result') }}">Teacher Salary</a></li>
+    <li><a href="{{ url_for('capital') }}">Capital Expenditure</a></li>
+    <li><a href="{{ url_for('overhead') }}">Overhead</a></li>
+    <li><a href="{{ url_for('withdrawal') }}">Withdrawal</a></li>
+    <li><a href="{{ url_for('student_debts') }}">Students with debts</a></li>
+</ul><br>
+<br>
+<form action="{{ url_for('overhead') }}" method="post">
+    <label>Reason
+        <input type="text" name="reason">
+    </label>
+    <label>Amount
+        <input type="text" name="amount">
+    </label>
+    <label>Sum
+        <input type="number" name="sum">
+    </label>
+    <input type="submit" value="submit">
+</form>
+{% for over2 in all_over %}
+<h3 style="float: right;">{{ over2.total_sum }}</h3>
+{% endfor %}
+<table id="customers">
+<tr>
+    <th>Date</th>
+    <th>Reason</th>
+    <th>Amount</th>
+    <th>Sum</th>
+  </tr>
+    {% for overhead in over %}
+    <tr>
+          <td>{{ overhead.payed_data.strftime('%B %d, %Y') }}</td>
+        <td>{{ overhead.reason }}</td>
+        <td>{{ overhead.quantity }}</td>
+        <td>{{ overhead.sum }}</td>
+
+    </tr>
+    {% endfor %}
+</table>
+</body>
+</html>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends 'base template/home.html' %}
+{% block login %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        form{margin-left: 10%}
+    </style>
+</head>
+<body>
+<form method="post" action="{{ url_for('change_teacher_info') }}">
+{% for user in users %}
+    <label>Name
+        <input type="text" value="{{ user.name }}" name="name"></label>
+    <label>Surname
+        <input type="text" name="surname" value="{{ user.surname }}"></label>
+    <label>Gmail
+        <input type="text" name="gmail" value="{{ user.gmail }}"></label>
+    <label>Phone
+        <input type="text" name="phone" value="{{ user.phone }}"></label>
+
+    <br>
+    <input type="submit" value="change info">
+{% endfor %}
+</form>
+</body>
+</html>
+{% endblock %}

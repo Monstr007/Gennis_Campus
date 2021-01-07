@@ -1,0 +1,72 @@
+{% extends 'base template/home.html' %}
+{% block login %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        form{margin-left: 10%}
+    </style>
+</head>
+<body>
+<form method="post" action="{{ url_for('change') }}">
+{% for user in users %}
+    <label>Name
+        <input type="text" value="{{ user.name }}" name="name"></label>
+    <label>Surname
+        <input type="text" name="surname" value="{{ user.surname }}"></label>
+    <label>Username
+        <input type="text" name="gmail" value="{{ user.username }}"></label>
+    <label>Phone
+        <input type="text" name="phone" value="{{ user.phone }}"></label>
+    <label>Subject-1
+    {% if user.subject_1 != None %}
+    <select id="country" name="subject_1">
+    <option value="{{ user.subject_1 }}">{{ user.subject_1 }}</option>
+         <option>Choose your first subject</option>
+  <option  value="English Language">English Language</option>
+  <option  value="Russian Language">Russian Language</option>
+  <option  value="Math">Mathematics</option>
+  <option  value="History">History</option>
+  <option  value="Mother Tongue and Literature">Mother Tongue & Literature</option>
+  <option  value="Chemistry">Chemistry</option>
+  <option  value="Physics">Physics</option>
+  </select>
+        </label>
+    {% endif %}
+   <label>Subject-2
+    {% if user.subject_2 != None %}
+    <select id="country" name="subject_2">
+    <option value="{{ user.subject_2 }}">{{ user.subject_2 }}</option>
+        <option>Choose your second subject</option>
+  <option  value="English Language">English Language</option>
+  <option  value="Russian Language">Russian Language</option>
+  <option  value="Math">Mathematics</option>
+  <option  value="History">History</option>
+  <option  value="Mother Tongue and Literature">Mother Tongue & Literature</option>
+  <option  value="Chemistry">Chemistry</option>
+  <option  value="Physics">Physics</option>
+    </select></label>
+    {% endif %}
+    <label>Subject-3
+    {% if user.subject_3 != None %}
+    <select id="country" name="subject_3">
+    <option value="{{ user.subject_3 }}">{{ user.subject_3 }}</option>
+  <option>Choose your third subject</option>
+  <option  value="English Language">English Language</option>
+  <option  value="Russian Language">Russian Language</option>
+  <option  value="Math">Mathematics</option>
+  <option  value="History">History</option>
+  <option  value="Mother Tongue and Literature">Mother Tongue & Literature</option>
+  <option  value="Chemistry">Chemistry</option>
+  <option  value="Physics">Physics</option>
+    </select></label>
+    {% endif %}
+    <br>
+    <input type="submit" value="change info">
+{% endfor %}
+</form>
+</body>
+</html>
+{% endblock %}

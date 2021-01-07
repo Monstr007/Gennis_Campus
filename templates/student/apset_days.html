@@ -1,0 +1,93 @@
+{% extends 'base template/home.html' %}
+{% block create_groupe %}
+<!DOCTYPE html>
+<html lang="en">
+ <style>
+   #customers {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+    margin-left: 10%;
+
+}
+
+#customers td, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+    text-align: center;
+}
+
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: #ddd;}
+
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  background-color:  rgb(220, 220, 220);
+  color: rgb(30, 30, 30);
+}
+        td{
+            background-color:rgb(220, 220, 220);
+            color:rgb(0, 0, 0) ;
+        }
+        #country{
+            margin-left: 10%;
+        }
+        label{margin-left: 10%}
+</style>
+<body>
+
+    <table id="customers">
+  <tr>
+
+
+    <th style="width: 2%;">apset days </th>
+    <th style="width: 25%;"><a href="{{ url_for('due_days1') }}">Sababli</a></th>
+
+
+
+  </tr>
+
+
+
+        <tr>
+
+
+
+
+
+                {% for apsets in apset_days %}
+                {% if apsets.apset != None %}
+                    <td style="width: 2%;">{{ apsets.apset }}
+                        <input class="checkbox" type="checkbox" data-id="{{ apsets.id }}"{% if apsets.for_sabab %} checked {% endif %}>
+                    </td>
+                {% endif %}
+
+        </tr>
+{% endfor %}
+
+    </table>
+
+<script>
+     const checkbox2 = document.querySelectorAll('.checkbox')
+        for (d = 0; d < checkbox2.length; d++){
+            const checked = checkbox2[d]
+            checked.onchange = function (e) {
+                console.log(e,'event')
+                const check_id = e.target.dataset['id']
+                const checking = e.target.checked
+                fetch('/get_id/'+check_id,{
+                    method : "POST",
+                    body : JSON.stringify({
+                        'completed' : checking
+                    }),
+                    headers : {
+                        'Content-type' : 'application/json'
+                    }
+                })
+            }
+        }
+</script>
+</body>
+</html>
+{% endblock %}

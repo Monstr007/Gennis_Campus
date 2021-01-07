@@ -1,0 +1,162 @@
+{% extends 'base template/home.html' %}
+{% block my_groups %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+#customers {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+    margin-left: 10%;
+
+}
+
+#customers td, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+    text-align: center;
+}
+
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: #ddd;}
+
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  background-color:  rgb(220, 220, 220);
+  color: rgb(30, 30, 30);
+}
+        td{
+            background-color:rgb(220, 220, 220);
+            color:rgb(0, 0, 0) ;
+        }
+        #country{
+            margin-left: 10%;
+        }
+
+        form{margin-left: 10%}
+        #kegan{margin-left: 1%}
+        #kemagan{margin-left: 12%}
+        #al{
+            margin-left: 7.5%;
+            width: 100%;
+            height: 5.5%;
+        }
+</style>
+</head>
+<body>
+<ul id="al">
+    <li><a href="{{ url_for('my_group1') }}">Group-1</a></li>
+    <li><a href="{{ url_for('my_group2') }}">Group-2</a></li>
+    <li><a href="{{ url_for('my_group3') }}">Group-3</a></li>
+    <li><a href="{{ url_for('my_group4') }}">Group-4</a></li>
+    <li><a href="{{ url_for('my_group5') }}">Group-5</a></li>
+    <li><a href="{{ url_for('my_group6') }}">Group-6</a></li>
+    <li><a href="{{ url_for('my_group7') }}">Group-7</a></li>
+    <li><a href="{{ url_for('my_group8') }}">Group-8</a></li>
+    <li><a href="{{ url_for('my_group9') }}">Group-9</a></li>
+    <li><a href="{{ url_for('my_group10') }}">Group-10</a></li>
+</ul>
+<br>
+<br>
+{% for kid in group %}
+<h1 style="text-align: center">{{ kid.name }}</h1>
+{% endfor %}
+
+   <table id="customers">
+  <tr>
+
+    <th style="width: 25%;">Name  |  Surname  |  Gmail  |  Payment</th>
+
+
+
+  </tr>
+          {% for student in query %}
+        <tr>
+
+
+            <td style="width: 2%;"><a href="{{ url_for('see_att',id=student.id) }}" >{{ student.name }}</a> | {{ student.surname }} | {{ student.gmail }} | {{ student.money }}
+            <label>Kegan<input class="checkbox1" type="checkbox" data-id="{{ student.id }}" {% if student.attendance %} checked {% endif %}>
+            </label>
+            <br>
+                {% if student.attendance == True %}
+
+
+                         {% if groups.subject == 'Ingliz tili' or groups.subject == 'Rus tili' %}
+                    <form action="{{ url_for('attendance_1',student_id=student.id,group_id=groups.id) }}" method="post">
+
+                    <label>Uy ishi
+                        <input name="homework" type="number"></label>
+                    <label>Lug'at
+                        <input name="dictionary" type="number"></label>
+                    <label>Darsda qatnashish
+                        <input name="active" type="number"></label>
+                    <input type="submit" value="Baholash">
+                    </form>
+                            {% endif %}
+
+                    {% if groups.subject == 'Matematika' or groups.subject == 'Tarix' or groups.subject == 'Fizika' or groups.subject == 'Ona tili va Adabiyot'
+                            or groups.subject == 'Biologiya'
+                            %}
+                        <form method="post" action="{{ url_for('attendance_1',group_id=groups.id,student_id=student.id) }}">
+                        <label>Uy ishi
+                        <input name="homework" type="number"></label>
+                    <label>Darsda qatnashish
+                        <input name="active" type="number"></label>
+                            <input type="submit" value="Baholash"></form>
+
+                    {% endif %}
+
+
+
+                    {% endif %}
+                    {% if student.attendance == False %}
+
+            <form id="kemagan" method="post" action="{{ url_for('attendance_3',student_id=student.id,group_id=groups.id) }}"><input type="submit" value="kemagan"></form>
+
+
+                    {% endif %}
+            </td>
+
+        </tr>
+
+        {% endfor %}
+    </table>
+
+<script>
+    const checkbox1 = document.querySelectorAll('.checkbox1')
+        for (d = 0; d < checkbox1.length; d++){
+            const checked = checkbox1[d]
+            checked.onchange = function (e) {
+                console.log(e,'event')
+                const check_id = e.target.dataset['id']
+                const checking = e.target.checked
+                fetch('/check1/'+check_id,{
+                    method : "POST",
+                    body : JSON.stringify({
+                        'completed' : checking
+                    }),
+                    headers : {
+                        'Content-type': 'application/json'
+
+
+                    }
+
+                })
+                .then(function (jsonResponse) {
+
+                window.location.reload(true)
+
+
+                })
+
+            }
+        }
+
+</script>
+</body>
+</html>
+{% endblock %}

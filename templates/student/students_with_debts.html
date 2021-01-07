@@ -1,0 +1,92 @@
+{% extends 'base template/home.html' %}
+{% block admin %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Users</title>
+    <style>
+     #customers {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+    margin-left: 10%;
+
+}
+
+#customers td, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+    text-align: center;
+}
+
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: #ddd;}
+
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  background-color:  rgb(220, 220, 220);
+  color: rgb(30, 30, 30);
+}
+        td{
+            background-color:rgb(220, 220, 220);
+            color:rgb(0, 0, 0) ;
+        }
+        #country{
+            margin-left: 10%;
+        }
+        #al{
+            margin-left: 7.5%;
+            width: 100%;
+            height: 5.5%;}
+</style>
+</head>
+<body>
+<ul id="al">
+    <li><a href="{{ url_for('payment') }}">Payment</a></li>
+    <li><a href="{{ url_for('teacher_result') }}">Teacher Salary</a></li>
+    <li><a href="{{ url_for('capital') }}">Capital Expenditure</a></li>
+    <li><a href="{{ url_for('overhead') }}">Overhead</a></li>
+    <li><a href="{{ url_for('withdrawal') }}">Withdrawal</a></li>
+    <li><a href="{{ url_for('student_debts') }}">Students with debts</a></li>
+</ul>
+<br>
+<br>
+<table id="customers">
+<tr>
+    <th>Name</th>
+    <th>Surname</th>
+    <th>Phone</th>
+    <th>Balance</th>
+  </tr>
+    {% for debt in debts %}
+        {% if debt.money < 0 %}
+            {% if user.locations == 1 or user.director %}
+                {% if debt.locations == 1 %}
+            <tr>
+                <td><a href="{{ url_for('student_profile2',student_id=debt.id) }}">{{ debt.name }}</a></td>
+                <td>{{ debt.surname }}</td>
+                <td>{{ debt.username }}</td>
+                <td>{{ debt.money }}</td>
+            </tr>
+                    {% endif %}
+            {% endif %}
+             {% if user.locations == 2 or user.director %}
+                 {% if debt.locations == 2 %}
+            <tr>
+                <td><a href="{{ url_for('student_profile2',student_id=debt.id) }}">{{ debt.name }}</a></td>
+                <td>{{ debt.surname }}</td>
+                <td>{{ debt.username }}</td>
+                <td>{{ debt.money }}</td>
+            </tr>
+                     {% endif %}
+                 {% endif %}
+        {% endif %}
+    {% endfor %}
+
+</table>
+</body>
+</html>
+{% endblock %}

@@ -1,0 +1,134 @@
+{% extends 'base template/home.html' %}
+{% block create_groupe %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        fieldset{
+            margin-left: 7.5%;
+        }
+       #customers {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+    margin-left: 7.5%;
+
+}
+
+#customers td, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+    text-align: center;
+}
+
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: #ddd;}
+
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  background-color:  rgb(220, 220, 220);
+  color: rgb(30, 30, 30);
+}
+        td{
+            background-color:rgb(220, 220, 220);
+            color:rgb(0, 0, 0) ;
+        }
+        #country{
+            margin-left: 10%;
+        }
+       p{margin-left: 7.5%;
+        }
+    </style>
+</head>
+<body>
+
+                {% if student.for_group == False %}
+                <p>O'quvhilarni tanlang</p>
+                    <br>
+                {% endif %}
+            {% if student.for_group == True %}
+              <fieldset>
+              <form  action="{{ url_for('create_group') }}" method="post">
+
+                  <label>Group Name
+                      <input type="text" name="name" id="textArea"></label>
+                  <div>
+                    <label for="select">Teacher</label>
+                    <div>
+                    <select  name="teacher" id="select">
+                        {% for expert in teachers %}
+                          <option value="{{ expert.id }}">{{ expert.name }} {{ expert.subject }} {{ expert.locations }}</option>
+                        {% endfor %}
+                    </select>
+                        </div>
+                  </div>
+              <label>Type of Cource
+                    <input type="text" name="type_of_course"></label>
+              <label>Cost of Cource
+                    <input type="text" name="cost"></label>
+              {% if user.director == True %}
+                   <select id="country" name="location">
+                   <option  value="xojakent">Xo'jaket</option>
+                    <option  value="gazalkent">Gazalkent</option>
+                    </select>
+                {% endif %}
+                  <button type="submit" >Submit</button></form>
+
+
+              </fieldset>
+                 {% endif %}
+
+            <br>
+<table id="customers">
+
+    {% if user.locations == 1 %}
+   {% if student.for_group == True %}
+       {% if student.locations == 1 %}
+<tr>
+
+    <th>Tanlangan o'quvchilar</th>
+    {% endif %}
+{% endif %}
+{% endif %}
+
+</tr>
+   {% for st in student1 %}
+    {% if user.locations == 1 %}
+    {% if st.for_group == True %}
+    {% if st.locations == 1 %}
+<tr>
+    <td>{{ st.name }} {{ st.surname }}</td>
+</tr>
+   {% endif %}
+{% endif %}
+{% endif %}
+{% endfor %}
+    {% if user.locations == 2 %}
+   {% if student.for_group == True %}
+       {% if student.locations == 2 %}
+<tr>
+
+    <th>Tanlangan o'quvchilar</th>
+    {% endif %}
+{% endif %}
+{% endif %}
+</tr>
+   {% for st in student1 %}
+    {% if user.locations == 2 %}
+    {% if st.for_group == True %}
+    {% if st.locations == 2 %}
+<tr>
+    <td>{{ st.name }} {{ st.surname }}</td>
+</tr>
+   {% endif %}
+{% endif %}
+{% endif %}
+{% endfor %}
+</table>
+
+</body>
+</html>
+{% endblock %}

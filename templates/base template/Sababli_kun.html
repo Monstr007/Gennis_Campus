@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{{ form.csrf_token }}
+<form action="{{ url_for('due_days1') }}" method="post" enctype="multipart/form-data">
+    {{ form.image(class = "form-control-file")  }}
+
+
+        <label>Reason
+                      <input type="text" name="reason" id="textArea"></label>
+
+    <input type="submit" value="Submit">
+</form>
+
+
+</body>
+</html>

@@ -1,0 +1,101 @@
+{% extends 'base template/home.html' %}
+{% block groups%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Inside of group</title>
+    <style>
+   #customers {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+    margin-left: 10%;
+
+}
+
+#customers td, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+    text-align: center;
+}
+
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: #ddd;}
+
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  background-color:  rgb(220, 220, 220);
+  color: rgb(30, 30, 30);
+}
+        td{
+            background-color:rgb(220, 220, 220);
+            color:rgb(0, 0, 0) ;
+        }
+        #country{
+            margin-left: 10%;
+        }
+        label{margin-left: 10%}
+         #al{
+            margin-left: 7.5%;
+            width: 100%;
+            height: 5.5%;
+        }
+</style>
+</head>
+
+<body>
+<ul id="al">
+    <li><a href="{{ url_for('all_groups2') }}">All Groups</a></li>
+    <li><a href="{{ url_for('group_without_teacher2') }}">Groups Without Teacher</a> </li>
+</ul>
+<br>
+<br>
+
+
+                {% for group in groups %}
+                    {% if group.location == 2 %}
+                        <h1 style="text-align: center">{{ group.name }}</h1>
+                    <a href="{{ url_for('manage',id=group.id) }}"><button style="margin-left: 90%">Manage</button></a>
+                    {% endif %}
+
+
+
+                    <h3 style="margin-left: 10%">Teacher: <a href="{{ url_for('teacher_profile',id=group.teacher_1) }}">{{ group.teacher_name }}</a></h3>
+
+
+
+
+    <table id="customers">
+  <tr>
+
+
+      <th style="width: 2%;">Students</th>
+
+
+
+
+  </tr>
+
+
+
+        <tr>
+
+
+
+
+                {% for student in students %}
+                    {% if student.locations == 2 %}
+                    <td style="width: 2%;"><a href="{{ url_for('student_profile2',student_id=student.id) }}" >{{ student.name }}</a>
+                        </td>
+                    {% endif %}
+        </tr>
+
+{% endfor %}
+    </table>
+{% endfor %}
+
+</body>
+</html>
+{% endblock %}

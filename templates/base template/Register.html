@@ -1,0 +1,127 @@
+{% extends 'base template/home.html' %}
+{% block register %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+
+    <style>
+        body {margin:0;}
+ input {
+     width: 20%;
+     padding: 12px 20px;
+
+     box-sizing: border-box;
+     background-color: rgb(220, 220, 220);
+      margin-left: 8%;
+    margin-bottom: 1.5%;
+ }
+ #submit{
+     width: 10%;
+      margin-left: 11%;
+         }
+                select {
+          width: 15%;
+          padding: 16px 20px;
+          border: none;
+          border-radius: 4px;
+          background-color: rgb(220, 220, 220);
+                     margin-left: 11%;
+        }
+        option{
+            background-color: rgb(220, 220, 220);
+             margin-left: 11%;
+      margin-bottom: 10%;
+        }
+        label{
+             margin-left: 11%;
+         }
+
+    #country {
+      width: 200px ;
+      margin-bottom: 2%;
+    }
+    </style>
+</head>
+<body>
+
+<form method="post" action="{{ url_for('register') }}">
+
+  <input type="text"  name="name" placeholder="name">
+
+
+  <input type="text" id="surname" name="surname" placeholder="surname">
+
+   <input type="text" id="username" name="username" placeholder="username">
+    <br>
+
+  <input type="text" id="age" name="age" placeholder="age">
+    <br>
+    <input type="text" id="phone" name="phone" placeholder="phone">
+
+    <input type="text" id="father_phone" name="phone_father" placeholder="father's phone">
+    <input type="text" id="father_phone" name="father_name" placeholder="Otasining ismi">
+
+    <input type="text" id="mother_phone" name="phone_mother" placeholder="mother's phone">
+    <br>
+
+    <input type="password" id="password" name="password" placeholder="password">
+
+    <input type="password" id="confirmation" name="confirm_password" placeholder="confirm password">
+    <br>
+
+
+  <select id="country" name="location">
+  <option  value="xojakent">Xo'jaket</option>
+  <option  value="gazalkent">Gazalkent</option>
+  </select>
+
+    <br>
+
+     <select id="country" name="subject_1">
+         <option>Birinchi Fan</option>
+  <option  value="Ingliz tili">Ingliz tili</option>
+  <option  value="Rus tili">Rus tili</option>
+  <option  value="Matematika">Matematika</option>
+  <option  value="Tarix">Tarix</option>
+  <option  value="Ona tili va Adabiyot">Ona tili va Adabiyot</option>
+  <option  value="Kimyo">Kimyo</option>
+  <option  value="Fizika">Fizika</option>
+         <option  value="Biologiya">Biologiya</option>
+         <option  value="Uy xamshiraligi">Uy xamshiraligi</option>
+     </select>
+    <br>
+
+    <select id="country" name="subject_2">
+        <option>Ikkinchi Fan</option>
+  <option  value="Ingliz tili">Ingliz tili</option>
+  <option  value="Rus tili">Rus tili</option>
+  <option  value="Matematika">Matematika</option>
+  <option  value="Tarix">Tarix</option>
+  <option  value="Ona tili va Adabiyot">Ona tili va Adabiyot</option>
+  <option  value="Kimyo">Kimyo</option>
+  <option  value="Fizika">Fizika</option>
+         <option  value="Biologiya">Biologiya</option>
+         <option  value="Uy xamshiraligi">Uy xamshiraligi</option>
+    </select>
+    <br>
+    <select id="country" name="subject_3">
+        <option>Uchinchi Fan</option>
+   <option  value="Ingliz tili">Ingliz tili</option>
+  <option  value="Rus tili">Rus tili</option>
+  <option  value="Matematika">Matematika</option>
+  <option  value="Tarix">Tarix</option>
+  <option  value="Ona tili va Adabiyot">Ona tili va Adabiyot</option>
+  <option  value="Kimyo">Kimyo</option>
+  <option  value="Fizika">Fizika</option>
+         <option  value="Biologiya">Biologiya</option>
+         <option  value="Uy xamshiraligi">Uy xamshiraligi</option>
+
+    </select>
+    <br>
+    <input id="submit" type="submit" value="submit">
+</form>
+</body>
+</html>
+{% endblock %}

@@ -1,0 +1,74 @@
+{% extends 'base template/home.html' %}
+{% block login %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+     #customers {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+margin-left: 7.5%;
+
+}
+
+#customers td, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+    text-align: center;
+}
+
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: #ddd;}
+
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  background-color:  rgb(220, 220, 220);
+  color: rgb(30, 30, 30);
+}
+        td{
+            background-color:rgb(220, 220, 220);
+            color:rgb(0, 0, 0) ;
+        }
+        #country{
+            margin-left: 10%;
+        }
+         #al{
+            margin-left: 7.5%;
+            width: 100%;
+            height: 5.5%;
+        }
+</style>
+</head>
+<body>
+
+<table id="customers">
+<tr>
+    <th>Photo</th>
+    <th>Name</th>
+    <th>Surname</th>
+    <th>Username</th>
+    <th>Balance</th>
+
+</tr>
+    {% for info in numbers %}
+        {% if info.locations == 1 %}
+        {% if info.director == False and info.xojakent_admin == False and info.gazalkent_admin == False %}
+    <tr>
+        <td><img src="{{ info.photo }}" alt="user image" width="100px"></td>
+        <td><a href="{{ url_for('student_profile2',student_id=info.id) }}">{{ info.name }}</a></td>
+        <td>{{ info.surname }}</td>
+        <td>{{ info.username }}</td>
+        <td>{{ info.money }}</td>
+
+    </tr>
+        {% endif %}
+        {% endif %}
+    {% endfor %}
+</table>
+</body>
+</html>
+{% endblock %}

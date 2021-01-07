@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+<style>
+    body {margin:0;
+    }
+ul {
+  list-style-type: none;
+  margin: 0;
+    width: 100px;
+    height: 44em;
+    float: left;
+    background-color: white;
+     position: fixed;
+    padding: 0;
+}
+
+li a {
+  display: block;
+  color: #000;
+  padding: 8px 16px;
+  text-decoration: none;
+    float: left;
+}
+
+li a.active {
+  background-color: white;
+  color: white;
+    float: left;
+}
+
+li a:hover:not(.active) {
+  background-color: #555;
+  color: white;
+    float: left;
+}
+</style>
+</head>
+<body>
+<ul>
+{% if user and not teacher %}
+<li><a href="/info">|||</a> </li>
+{% endif %}
+    {% if teacher %}
+<li><a href="/info_teacher">|||</a> </li>
+{% endif %}
+    <li><a class="active" href="/"><img src="/static/img/photo_2020-12-16_13-11-37.jpg" width="60px"></a></li>
+     {% if not user and not teacher %}
+
+  <li><a href="/register">Register</a></li>
+  <li><a href="/login">Login</a></li>
+
+{% endif %}
+    {% if user.director == True  %}
+        <li><a href="/register">Register Student</a></li>
+        <li><a href="/new_students">New Students</a></li>
+        <li><a href="/all_groups">Groups Xojakent</a></li>
+        <li><a href="/all_groups2">Groups Gazalkent</a></li>
+         <li><a href="/register_teacher">Register Teacher</a></li>
+        <li><a href="/admins">All users</a></li>
+        <li><a href="/teachers">Teachers</a></li>
+        <li><a href="/sababli_qilish">Absent Students</a></li>
+        <li><a href='/payment'>Accounting</a></li>
+        <li><a href="/profits">Profits</a></li>
+    {% endif %}
+    {% if user and user.xojakent_admin == True  %}
+        <li><a href="/register">Register Student</a></li>
+     <li><a href="/location-1">New Students</a></li>
+        <li><a href="/study_students">Students</a> </li>
+        <li><a href="/register_teacher">Register Teacher</a></li>
+        <li><a href="/all_groups">Groups</a></li>
+         <li><a href="/teachers2">Teachers</a></li>
+        <li><a href='/payment'>Accounting</a></li>
+        {% endif %}
+        {% if teacher %}
+        <li><a href="/my_group1">My group</a></li>
+        {% endif %}
+  {%if user.gazalkent_admin  == True %}
+      <li><a href="/register">Register Student</a></li>
+      <li><a href="/location-2">New Students</a></li>
+      <li><a href="/study_students2">Students</a> </li>
+      <li><a href="/register_teacher">Register Teacher</a></li>
+      <li><a href="/all_groups2">Groups</a></li>
+      <li><a href="/teachers2">Teachers</a></li>
+      <li><a href='/payment'>Payment</a></li>
+  {% endif %}
+    {% if user and user.gazalkent_admin == False and user.xojakent_admin == False and user.director == False %}
+    <li><a href='/group1'>My Groups</a></li>
+    <li><a href='/my_attandance1'>My attendance</a> </li>
+{% endif %}
+        {% if user or teacher %}
+  <li><a href="/logout">Logout</a> </li>
+     {% endif %}
+{% if user %}
+
+{% endif %}
+
+</ul>
+
+{% block register %}
+{% endblock %}
+{% block login %}
+{% endblock %}
+{% block list_students %}
+{% endblock %}
+{% block xojakent_english %}
+{% endblock %}
+{% block xojakent_russian %}
+{% endblock %}
+{% block xojakent_math %}
+{% endblock %}
+{% block xojakent_history %}
+{% endblock %}
+{% block xojakent_mother_tongue %}
+{% endblock %}
+{% block xojakent_chemistry %}
+{% endblock %}
+{% block xojakent_physics %}
+{% endblock %}
+{% block xojakent %}
+{% endblock %}
+{% block gazalkent %}
+{% endblock %}
+{% block gazalkent_russian %}
+{% endblock %}
+{% block gazalkent_english %}
+{% endblock %}
+{% block gazalkent_math %}
+{% endblock %}
+{% block gazalkent_history %}
+{% endblock %}
+{% block gazalkent_tongue %}
+{% endblock %}
+{% block gazalkent_chemistry %}
+{% endblock %}
+{% block gazalkent_physics %}
+{% endblock %}
+{% block admin %}
+{% endblock %}
+{% block register_teacher %}
+{% endblock %}
+{% block create_groupe %}
+{% endblock %}
+{% block groups %}
+{% endblock %}
+{% block my_groups %}
+{% endblock %}
+{% block add_group %}
+{% endblock %}
+{% block teachers %}
+{% endblock %}
+{% block teachers2 %}
+{% endblock %}
+{% block student_group %}
+{% endblock %}
+{% block attendance %}
+{% endblock %}
+{% block student_group2 %}
+{% endblock %}
+{% block student_group3 %}
+{% endblock %}
+{% block base_gr %}
+{% endblock %}
+{% block base_att %}
+{% endblock %}
+{% block attendance2 %}
+{% endblock %}
+{% block attendance3 %}
+{% endblock %}
+{% block teacher_name %}
+{% endblock %}
+
+</body>
+</html>

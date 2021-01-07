@@ -1,0 +1,62 @@
+{% extends 'base template/home.html' %}
+{% block admin %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Users</title>
+    <style>
+     #customers {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+    margin-left: 10%;
+
+}
+
+#customers td, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+    text-align: center;
+}
+
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: #ddd;}
+
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  background-color:  rgb(220, 220, 220);
+  color: rgb(30, 30, 30);
+}
+        td{
+            background-color:rgb(220, 220, 220);
+            color:rgb(0, 0, 0) ;
+        }
+        #country{
+            margin-left: 10%;
+        }
+</style>
+</head>
+<body>
+<p style="margin-left: 7.5%">Current Salary: {{ teacher.salary }}</p>
+<table id="customers">
+<tr>
+    <th>Previous Salary</th>
+    <th>Token Salary</th>
+    <th>Residue Salary</th>
+    <th>Token Data</th>
+    </tr>
+    {% for salary in cash %}
+    <tr>
+    <td>{{ salary.salary }}</td>
+    <td>{{ salary.payment }}</td>
+    <td>{{ salary.result }}</td>
+    <td>{{ salary.payment_data.strftime('%B %d, %Y') }}</td>
+    </tr>
+    {% endfor %}
+</table>
+</body>
+</html>
+{% endblock %}

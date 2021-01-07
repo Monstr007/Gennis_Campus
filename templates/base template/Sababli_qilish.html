@@ -1,0 +1,73 @@
+{% extends 'base template/home.html' %}
+{% block create_groupe %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Inside of group</title>
+    <style>
+   #customers {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+    margin-left: 10%;
+
+}
+
+#customers td, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+    text-align: center;
+}
+
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: #ddd;}
+
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  background-color:  rgb(220, 220, 220);
+  color: rgb(30, 30, 30);
+}
+        td{
+            background-color:rgb(220, 220, 220);
+            color:rgb(0, 0, 0) ;
+        }
+        #country{
+            margin-left: 10%;
+        }
+        label{margin-left: 10%}
+</style>
+</head>
+
+<body>
+     <table id="customers">
+  <tr>
+
+
+      <th style="width: 2%;">Student name</th>
+
+
+
+
+  </tr>
+
+
+
+        <tr>
+
+
+
+
+                {% for student in query %}
+
+                    <td style="width: 2%;"><a href="{{ url_for('show_due_days',student_id=student.id) }}">{{ student.name }}    {{ student.surname }}</a></td>
+
+        </tr>
+
+{% endfor %}
+    </table>
+
+</body>
+</html>
+{% endblock %}

@@ -1,0 +1,77 @@
+{% extends 'base template/home.html' %}
+{% block login %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+ <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <style>
+
+        div{
+            margin-left: 10%;
+        }
+        #img{
+            margin-left: 45%;
+
+   border-radius: 8px;
+
+
+        }
+        label{margin-left: 10%}
+        #a{
+           padding-top: 12px;
+  padding-bottom: 12px;
+            margin-left: 45%;
+
+        }
+        label{margin-left: 10%}
+    i{
+        font-size: 100px;
+    }
+    </style>
+</head>
+<body>
+
+{% for user in users %}
+    <img id="img" src="{{ user.photo }}" width="200px" alt="student_image">
+    <br>
+    <a id="a" href="{{ url_for('photo_add') }}"><i class="fas fa-pencil-alt"></i></a>
+    <div>{{ user.name }}</div>
+    <div>{{ user.surname }}</div>
+    <div>{{ user.phone }}</div>
+    <div>{{ user.gmail }}</div>
+    {% if user.subject_1 != None %}
+    <label>Subject-1</label>
+    <div>{{ user.subject_1 }}</div>
+    {% endif %}
+    {% if user.subject_2 != None %}
+    <label>Subject-2</label>
+    <div>{{ user.subject_2 }}</div>
+    {% endif %}
+    {% if user.subject_3 != None %}
+    <label>Subject-3</label>
+    <div>{{ user.subject_3 }}</div>
+    {% endif %}
+{% endfor %}
+
+    <label>Group-1</label>
+
+    <div>{{ subject_1.subject }} </div>
+
+
+    <label>Group-2</label>
+    <div>{{ subject_2.subject }}</div>
+
+    <label>Group-3</label>
+    <div>{{ subject_3.subject }}</div>
+
+
+
+<a id="a" href="{{ url_for('change_info') }}"><input type="submit" value="change information"></a>
+<br>
+<br>
+<a id="a" href="{{ url_for('change_password') }}"><input type="submit" value="change password"></a>
+</body>
+</html>
+{% endblock %}

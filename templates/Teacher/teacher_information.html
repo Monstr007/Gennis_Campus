@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Teacher information</title>
+</head>
+<body>
+{% for teach in teacher %}
+<div><img src="{{ teach.photo }}"></div>
+<div>{{ teach.username }}</div>
+<div>{{ teach.name }}</div>
+<div>{{ teach.surname }}</div>
+<div>{{ teach.phone }}</div>
+<div>{{ teach.otasining_ismi }}</div>
+{% endfor %}
+{% for gr in groups %}
+    <div><a href="{{ url_for('inside_of_group',id=gr.id) }}">{{ gr.name }}</a></div>
+{% endfor %}
+
+
+</body>
+</html>

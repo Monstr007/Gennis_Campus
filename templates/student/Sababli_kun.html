@@ -1,0 +1,68 @@
+{% extends 'base template/home.html' %}
+{% block login %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+     <style>
+   #customers {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+    margin-left: 7.5%;
+
+}
+
+#customers td, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+    text-align: center;
+}
+
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: #ddd;}
+
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  background-color:  rgb(220, 220, 220);
+  color: rgb(30, 30, 30);
+}
+        td{
+            background-color:rgb(220, 220, 220);
+            color:rgb(0, 0, 0) ;
+        }
+        #country{
+            margin-left: 10%;
+        }
+        form{margin-left: 7.5%}
+</style>
+</head>
+<body>
+{{ form.csrf_token }}
+<form action="{{ url_for('due_days1') }}" method="post" enctype="multipart/form-data">
+    {{ form.image(class = "form-control-file")  }}
+
+
+        <label>Reason
+                      <input type="text" name="reason" id="textArea"></label>
+
+    <input type="submit" value="Submit">
+</form>
+<br>
+
+<table id="customers">
+    <tr>
+        <th>Absent_days</th>
+    </tr>
+
+        <tr>
+        <td>{{ get.apset.strftime('%B %d, %Y') }}</td>
+        </tr>
+
+</table>
+
+</body>
+</html>
+{% endblock %}

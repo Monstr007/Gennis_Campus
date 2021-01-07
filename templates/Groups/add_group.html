@@ -1,0 +1,120 @@
+{% extends 'base template/home.html' %}
+{% block login %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>xojakent russian language</title>
+    <style>
+   #customers {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+    margin-left: 10%;
+
+}
+
+#customers td, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+    text-align: center;
+}
+
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: #ddd;}
+
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  background-color:  rgb(220, 220, 220);
+  color: rgb(30, 30, 30);
+}
+        td{
+            background-color:rgb(220, 220, 220);
+            color:rgb(0, 0, 0) ;
+        }
+        #country{
+            margin-left: 10%;
+        }
+        label{margin-left: 10%}
+</style>
+</head>
+<body>
+
+<form method="post" action="{{ url_for('add_group') }}">
+<label>Groups
+    <select name="group" id="group">
+        {% for group in groups %}
+            <option value="{{ group.name }}">{{ group.name }}</option>
+        {% endfor %}
+    </select>
+<label>Teachers
+    <select name="teacher" id="teacher">
+        {% for teacher in teachers %}
+            <option value="{{ teacher.id }}">{{ teacher.name }}</option>
+        {% endfor %}
+    </select>
+     <input type="submit" value="submit" name="submit">
+</form>
+
+
+
+
+    <table id="customers">
+  <tr>
+    <th style="width: 15%;">Name</th>
+    <th style="width: 10%;">Surname</th>
+    <th style="width: 10%;">Age</th>
+    <th style="width: 10%;">Phone</th>
+
+
+  </tr>
+
+        {% for kid in student %}
+            {% if user.locations ==1 %}
+            {% if kid.locations == 1 %}
+                {% if kid.xojakent_admin == False and kid.director == False  and kid.xojakent_admin == False %}
+        <tr>
+
+            <td style="width: 15%;">{{ kid.name }}</td>
+            <td style="width: 10%;">{{ kid.surname }}</td>
+            <td style="width: 10%;">{{ kid.age }}</td>
+            <td style="width: 10%;">{{ kid.phone }}</td>
+
+
+
+
+
+        </tr>
+                    {% endif %}
+            {% endif %}
+            {% endif %}
+        {% endfor %}
+     </tr>
+
+        {% for kid in student %}
+            {% if user.locations ==2 %}
+            {% if kid.locations == 2 %}
+                {% if kid.xojakent_admin == False and kid.director == False  and kid.xojakent_admin == False %}
+        <tr>
+
+            <td style="width: 15%;">{{ kid.name }}</td>
+            <td style="width: 10%;">{{ kid.surname }}</td>
+            <td style="width: 10%;">{{ kid.age }}</td>
+            <td style="width: 10%;">{{ kid.phone }}</td>
+
+
+
+
+
+        </tr>
+                    {% endif %}
+            {% endif %}
+            {% endif %}
+        {% endfor %}
+
+    </table>
+
+</body>
+</html>
+{% endblock %}

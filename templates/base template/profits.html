@@ -1,0 +1,37 @@
+{% extends 'base template/home.html' %}
+{% block login %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Profits</title>
+    <style>
+        div{margin-left: 10%}
+    </style>
+</head>
+<body>
+{% for student in all_students %}
+<div>All Students: {{ student.students }}</div>
+{% endfor %}
+{% for teacher in all_teachers %}
+<div>All Teachers: {{ teacher.teachers }}</div>
+{% endfor %}
+{% for group in all_groups %}
+<div>All Groups: {{ group.all_groups }}</div>
+{% endfor %}
+{% for overhead in all_overhead %}
+<div>All Overhead: {{ overhead.total_sum }}</div>
+{% endfor %}
+{% for capital in all_capital %}
+<div>All Capital Expenditure: {{ capital.total_sum }}</div>
+{% endfor %}
+{% for bank in banks %}
+<div>All Payment Sums: {{ bank.cash }}</div>
+{% endfor %}
+<div>Residue Sums: {{ polza }}</div>
+{% for charities in charity%}
+<div>All Charity Sums: {{ charities.bank_charity }}</div>
+{% endfor %}
+</body>
+</html>
+{% endblock %}

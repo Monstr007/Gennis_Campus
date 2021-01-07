@@ -1,0 +1,72 @@
+{% extends 'base template/home.html' %}
+{% block login %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>All Attendance</title>
+     <style>
+     #customers {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+    margin-left: 10%;
+
+}
+
+#customers td, #customers th {
+  border: 1px solid white;
+  padding: 8px;
+    text-align: center;
+}
+
+#customers tr:nth-child(even){background-color:white;}
+
+#customers tr:hover {background-color:white;}
+
+#customers th {
+
+  background-color:white;
+  color: rgb(30, 30, 30);
+}
+        td{
+            background-color:white;
+            color:rgb(0, 0, 0) ;
+        }
+        #country{
+            margin-left: 10%;
+        }
+         #absent{
+             color: red;
+
+             text-decoration: none;
+             background-color: white;
+         }
+         #present{
+             color: black;
+             text-decoration: none;
+             background-color: white;
+         }
+
+</style>
+</head>
+<body>
+<table id="customers">
+<tr>
+   <th>Attendance</th>
+  </tr>
+{% for att in attendance %}
+    <tr>
+    <td >{% if att.present != None %}
+        <a id="present" href="{{ url_for('change_present',id=att.id) }}">{{ att.present.strftime('%B %d, %Y') }}</a>
+        {% endif %}
+
+
+        {% if att.apset != None %}
+            <a id="absent" href="{{ url_for('change_absent',id=att.id) }}">{{ att.apset.strftime('%B %d, %Y') }}</a>
+        {% endif %}</td>
+    </tr>
+{% endfor %}
+</table>
+</body>
+</html>
+{% endblock %}

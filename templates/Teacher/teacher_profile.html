@@ -1,0 +1,38 @@
+{% extends 'base template/home.html' %}
+{% block login %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #img{
+            margin-left: 10%;
+        }
+        div{
+            margin-left: 10%;
+        }
+        #a{
+            margin-left: 10%;
+        }
+    </style>
+</head>
+<body>
+
+{% for user in users %}
+    <img id="img" src="{{ user.photo }}" width="100px" alt="student_image">
+    <div>{{ user.name }}</div>
+    <div>{{ user.surname }}</div>
+    <div>{{ user.phone }}</div>
+    <div>{{ user.gmail }}</div>
+    <div>{{ user.subject }}</div>
+
+
+{% endfor %}
+<a id="a" href="{{ url_for('change_teacher') }}"><input type="submit" value="change information"></a>
+<a id="a" href="{{ url_for('photo_teacher') }}"><input type="submit" value="change photo"></a>
+<a id="a" href="{{ url_for('change_password_teacher') }}"><input type="submit" value="change password"></a>
+<a id="a" href="{{ url_for('teacher_salary') }}">See Salary</a>
+</body>
+</html>
+{% endblock %}
